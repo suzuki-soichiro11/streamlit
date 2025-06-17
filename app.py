@@ -7,7 +7,7 @@ import numpy as np
 st.title("レイアウトとデータ可視化")
 
 # --- サイドバー  ---
-st.sidebar("設定")
+st.sidebar.header("設定")
 graph_type = st.sidebar.radio("グラフの種類を選択", ("Matplorlib", "Plotly"))
 
 # --- メイン画面 ---
@@ -27,11 +27,15 @@ with col2:
         st.subheader("Matplorlibグラフ")
         x = np.linspace(0, 10, 100)
         y = np.sin(x)
-        fig, ax = plt.subplot()
+        fig, ax = plt.subplots()
         ax.plot(x, y)
         st.pyplot(fig)
     else:
         st.subheader("Plotly")
         df = px.data.iris()
-        fig = px.scatter(df, x="sepal_width", y="sepal_length")
+        fig = px.scatter(
+            df,
+            x="sepal_width",
+            y="sepal_length",
+        )
         st.plotly_chart(fig, use_container_width=True)
